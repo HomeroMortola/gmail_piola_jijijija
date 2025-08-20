@@ -16,8 +16,7 @@ public class CombatienteTest {
         Combatiente c1 = new Combatiente();
         c1.ActivarEscudo();
         c1.RecibirDisparo();
-        assertTrue(c1.getVivo());
-        /*assertEquals("los valores no son iguales",50.0, c1.getVida());*/
+        assertEquals("los valores no son iguales",50.0, c1.getVida(),0.0001);
     }
     @Test 
     public void DarEscudo(){
@@ -25,8 +24,8 @@ public class CombatienteTest {
         Combatiente c2 = new Combatiente();
         c1.DarEscudo(c2);
         c2.RecibirDisparo();
-        assertTrue(c2.getVivo());
-        /*assertEquals("los valores no son iguales",50.0,c2.getVida());*/
+        //assertTrue(c2.getVivo());
+        assertEquals("los valores no son iguales",50.0,c2.getVida(),0.0001);
     }
     @Test 
     public void DispararCotraOtro(){
