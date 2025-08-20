@@ -20,6 +20,5 @@ public class AlumnoTest {
                     "Paradigmas 2",
                      nombre);
     }
-    @test
-    public void 
+
 }

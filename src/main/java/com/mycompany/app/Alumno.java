@@ -1,6 +1,6 @@
 package com.mycompany.app;
 public class Alumno {
-   private String nombre
+   private String nombre;
    public void setNombre(String _nombre){
    
    this.nombre = _nombre;
