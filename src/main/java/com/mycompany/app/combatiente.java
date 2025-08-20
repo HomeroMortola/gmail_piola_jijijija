@@ -34,6 +34,9 @@ public class combatiente {
     public boolean getVivo(){
         return Vivo;
     }
+    public void ActivarEscudo(){
+        
+    }
 
     
 }
