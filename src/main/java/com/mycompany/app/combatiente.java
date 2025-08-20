@@ -8,7 +8,7 @@ public class combatiente {
     private float PoderDelEscudo;
     private float daño = 100;
 
-    public void InicialisarComvatiente(){
+    public void InicialisarCombatiente(){
 
     }
     
@@ -26,6 +26,9 @@ public class combatiente {
         }
         else{
             this.Vida -= daño;
+        }
+        if (Vida < 1){
+            this.Vivo = false;
         }
         
 
