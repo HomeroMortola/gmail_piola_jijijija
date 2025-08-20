@@ -1,24 +1,24 @@
 package com.mycompany.app;
 
 
-public class combatiente {
+public class Combatiente {
     private float Vida = 100;
     private boolean Vivo = true;
     private boolean Escudo = false;
-    private float PoderDelEscudo;
+    private float PoderDelEscudo = 2;
     private float Daño = 100;
 
     
     
 
-    public void Disparar(combatiente ovjetivo){
-
+    public void Disparar(Combatiente _ovjetivo){
+        _ovjetivo.RecibirDisparo();
     }
     public float getVida() {
         return Vida;
     }
 
-    public void RescibirDisparo(){
+    public void RecibirDisparo(){
         if (Escudo) {
             this.Vida -= (Daño/PoderDelEscudo);
         }
@@ -35,8 +35,12 @@ public class combatiente {
         return Vivo;
     }
     public void ActivarEscudo(){
-        
+        this.Escudo = true;
     }
+    public void DarEscudo(Combatiente _ovjetivo){
+        _ovjetivo.ActivarEscudo();
+    }
+    
 
     
 }
