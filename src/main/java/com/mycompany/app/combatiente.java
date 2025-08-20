@@ -2,15 +2,13 @@ package com.mycompany.app;
 
 
 public class combatiente {
-    private float Vida;
-    private boolean Vivo;
-    private boolean Escudo;
+    private float Vida = 100;
+    private boolean Vivo = true;
+    private boolean Escudo = false;
     private float PoderDelEscudo;
-    private float daño = 100;
+    private float Daño = 100;
 
-    public void InicialisarCombatiente(){
-
-    }
+    
     
 
     public void Disparar(combatiente ovjetivo){
@@ -22,10 +20,10 @@ public class combatiente {
 
     public void RescibirDisparo(){
         if (Escudo) {
-            this.Vida -= (daño/PoderDelEscudo);
+            this.Vida -= (Daño/PoderDelEscudo);
         }
         else{
-            this.Vida -= daño;
+            this.Vida -= Daño;
         }
         if (Vida < 1){
             this.Vivo = false;

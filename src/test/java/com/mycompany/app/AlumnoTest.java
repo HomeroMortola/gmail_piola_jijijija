@@ -4,8 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import java.time.LocalDate;
 public class AlumnoTest {
-    public AlumnoTest() {
-    }
+    
     @Test
     public void testDemo1() {
         assertTrue(true);
