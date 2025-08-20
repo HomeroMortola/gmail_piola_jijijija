@@ -1,5 +1,5 @@
-public package com.mycompany.app;
-
+package com.mycompany.app;
+/*
 class MateriaTest {
     Materia m1 = new Materia();
     Alumno a1 = new Alumno();
@@ -13,4 +13,4 @@ class MateriaTest {
 
 
     
-}
+}*/
