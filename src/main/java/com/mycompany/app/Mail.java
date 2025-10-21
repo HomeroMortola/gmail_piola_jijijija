@@ -1,12 +1,13 @@
 package com.mycompany.app;
 import java.util.ArrayList;
 
-public class Mail extends Contacto{
+public class Mail {
     private ArrayList<Correo> bandejaEnviados;
     private ArrayList<Correo> bandejaDeEntrada;
+    private Contacto contactoPropio;
 
-    public Mail(String nombre, String correo) {
-        super(nombre, correo);
+    public Mail(Contacto contactoPropio) {
+        setContactoPropio(contactoPropio);
         bandejaEnviados = new ArrayList<Correo>();
         bandejaDeEntrada = new ArrayList<Correo>();
     }
@@ -27,6 +28,18 @@ public class Mail extends Contacto{
         return bandejaDeEntrada;
     }
 
+    public void setContactoPropio(Contacto contactoPropio) {
+        this.contactoPropio = contactoPropio;
+    }
+
+    public Contacto getContactoPropio() {
+        return contactoPropio;
+    }
+
+    public void crearCorreo(String asunto, String mensaje){
+        
+    }
+
     public void enviarCorreo(Correo correo, Mail destinatario) {
 
         bandejaEnviados.add(correo);
@@ -36,4 +49,6 @@ public class Mail extends Contacto{
     public void recibirCorreo(Correo correo) {
         bandejaDeEntrada.add(correo);
     }
+
+
 }
