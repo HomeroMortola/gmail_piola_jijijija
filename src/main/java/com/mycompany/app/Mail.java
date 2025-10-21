@@ -1,11 +1,12 @@
 package com.mycompany.app;
 import java.util.ArrayList;
 
-public class Mail {
+public class Mail extends Contacto{
     private ArrayList<Correo> bandejaEnviados;
     private ArrayList<Correo> bandejaDeEntrada;
 
-    public Mail() {
+    public Mail(String nombre, String correo) {
+        super(nombre, correo);
         bandejaEnviados = new ArrayList<Correo>();
         bandejaDeEntrada = new ArrayList<Correo>();
     }

@@ -8,23 +8,26 @@ import org.junit.Test;
 public class MailTest {
     @Test
     public void testEnviarCorreo(){
-        Mail m1 = new Mail();
+        Contacto c1 = new Contacto("Nombre","nombre@outlook.com");
+        Mail m1 = new Mail(c1.getNombre(), c1.getCorreo());
         
-        Correo c1 = new Correo("Asunto","Contenido","Remitente","Destinatarios");
+        Correo co1 = new Correo("Asunto","Contenido",c1.getCorreo(),"Destinatarios");
 
-        m1.enviarCorreo(c1, m1);
+        m1.enviarCorreo(co1, m1);
 
-        assertEquals(m1.getBandejaEnviados().get(0), c1);
+        assertEquals(m1.getBandejaEnviados().get(0), co1);
     }
     @Test
     public void testEnviarYRrecibirCorreo(){
-        Mail m1 = new Mail();
-        Mail m2 = new Mail();
+        Contacto c1 = new Contacto("Nombre", "nombre@outlook.com");
+        Contacto c2 = new Contacto("Nombre 2", "nombre2@outlook.com");
+        Mail m1 = new Mail(c1.getNombre(), c1.getCorreo());
+        Mail m2 = new Mail(c2.getNombre(), c2.getCorreo());
 
-        Correo c1 = new Correo("Asunto","Contenido","Remitente","Destinatarios");
+        Correo co1 = new Correo("Asunto","Contenido",c1.getCorreo(),c2.getCorreo());
 
-        m1.enviarCorreo(c1,m2);
+        m1.enviarCorreo(co1,m2);
 
-        assertEquals(m2.getBandejaDeEntrada().get(0), c1);
+        assertEquals(m2.getBandejaDeEntrada().get(0), co1);
     }
 }

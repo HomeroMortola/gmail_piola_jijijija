@@ -12,7 +12,6 @@ public class Correo {
         setContenido(contenido);
         setRemitente(remitente);
         setDestinatarios(destinatarios);
-
     }
 
     private void setAsunto(String asunto) {
