@@ -30,4 +30,45 @@ public class MailTest {
 
         assertEquals(m2.getBandejaDeEntrada().get(0), co1);
     }
+    @Test
+    public void testCrearCorreo(){
+        Contacto c1 = new Contacto("Nombre", "nombre@outlook.com");
+        Contacto c2 = new Contacto("Nombre 2", "nombre2@outlook.com");
+        Mail m1 = new Mail(c1);
+        Mail m2 = new Mail(c2);
+
+        m1.crearCorreo("Asunto", "Contenido", m2);
+
+        m1.enviarCorreo(m2);
+
+        assertNotNull(m2.getBandejaDeEntrada().get(0));
+    }
+    @Test 
+    public void testBandejaDeBorradores(){
+        Contacto c1 = new Contacto("Nombre", "nombre@outlook.com");
+        Mail m1 = new Mail(c1);
+
+        m1.crearCorreo("Asunto", "Contenido", m1);
+
+        m1.enviarABorrador();
+
+        assertNotNull(m1.getBandejaBorradores().get(0));
+    }
+    @Test
+    public void testCorreoMantieneContenido(){
+        Contacto c1 = new Contacto("Nombre", "nombre@outlook.com");
+        Contacto c2 = new Contacto("Nombre 2", "nombre2@outlook.com");
+        Mail m1 = new Mail(c1);
+        Mail m2 = new Mail(c2);
+
+        m1.crearCorreo("Asunto", "Contenido", m2);
+
+        m1.enviarCorreo(m2);
+
+        assertEquals(m2.getBandejaDeEntrada().get(0).getAsunto(),"Asunto");
+        assertEquals(m2.getBandejaDeEntrada().get(0).getContenido(),"Contenido");
+        assertEquals(m2.getBandejaDeEntrada().get(0).getRemitente(),"nombre@outlook.com");
+        assertEquals(m2.getBandejaDeEntrada().get(0).getDestinatarios(),"nombre2@outlook.com");
+    
+    }
 }
