@@ -21,7 +21,7 @@ public class Bandeja {
     }
 
     private void setBandejaBorradores() {
-        bandejaBorradores = new ArrayList<Correo>();
+        this.bandejaBorradores = new ArrayList<Correo>();
     }
 
     public ArrayList<Correo> getBandejaEnviados() {
