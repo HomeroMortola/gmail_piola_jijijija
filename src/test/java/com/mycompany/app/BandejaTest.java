@@ -1,9 +1,8 @@
 package com.mycompany.app;
 
-import static org.junit.Assert.assertEquals;
-
 import java.util.ArrayList;
 
+import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
 public class BandejaTest {
@@ -11,15 +10,17 @@ public class BandejaTest {
 
     @Test
     public void testDeFiltroDeAsunto() {
-        Contacto c1 = new Contacto("Nombre", "nombre@outlook.com");
-        Contacto c2 = new Contacto("Nombre 2", "nombre2@outlook.com");
-        Mail m1 = new Mail(c1);
-        Mail m2 = new Mail(c2);
+        Mail m1 = new Mail();
+        Mail m2 = new Mail();
+        Contacto c1 = new Contacto("Nombre", "nombre@outlook.com",m1);
+        Contacto c2 = new Contacto("Nombre 2", "nombre2@outlook.com",m2);
+        m1.logIn(c1);
+        m2.logIn(c2);
 
-        m1.crearCorreo("Asunto", "Contenido", m2);
-        m1.enviarCorreo(m2);
-        m1.crearCorreo("Asunto2", "Contenido2", m2);
-        m1.enviarCorreo(m2);
+        m1.crearCorreo("Asunto", "Contenido", c2);
+        m1.enviarCorreo(c2);
+        m1.crearCorreo("Asunto2", "Contenido2", c2);
+        m1.enviarCorreo(c2);
 
         ArrayList<Correo> resultado = m2.getBandeja().buscarCorreoPorAsunto("Asunto");
 
@@ -29,15 +30,17 @@ public class BandejaTest {
 
     @Test
     public void testDeFiltroDeContenido() {
-        Contacto c1 = new Contacto("Nombre", "nombre@outlook.com");
-        Contacto c2 = new Contacto("Nombre 2", "nombre2@outlook.com");
-        Mail m1 = new Mail(c1);
-        Mail m2 = new Mail(c2);
+        Mail m1 = new Mail();
+        Mail m2 = new Mail();
+        Contacto c1 = new Contacto("Nombre", "nombre@outlook.com",m1);
+        Contacto c2 = new Contacto("Nombre 2", "nombre2@outlook.com",m2);
+        m1.logIn(c1);
+        
 
-        m1.crearCorreo("Asunto", "Contenido", m2);
-        m1.enviarCorreo(m2);
-        m1.crearCorreo("Asunto2", "Contenido2", m2);
-        m1.enviarCorreo(m2);
+        m1.crearCorreo("Asunto", "Contenido", c2);
+        m1.enviarCorreo(c2);
+        m1.crearCorreo("Asunto2", "Contenido2", c2);
+        m1.enviarCorreo(c2);
 
         ArrayList<Correo> resultado = m2.getBandeja().buscarCorreoPorContenido("Contenido");
 
@@ -47,15 +50,17 @@ public class BandejaTest {
 
     @Test
     public void testDeFiltroDeRemitente() {
-        Contacto c1 = new Contacto("Nombre", "nombre@outlook.com");
-        Contacto c2 = new Contacto("Nombre 2", "nombre2@outlook.com");
-        Mail m1 = new Mail(c1);
-        Mail m2 = new Mail(c2);
+        Mail m1 = new Mail();
+        Mail m2 = new Mail();
+        Contacto c1 = new Contacto("Nombre", "nombre@outlook.com",m1);
+        Contacto c2 = new Contacto("Nombre 2", "nombre2@outlook.com",m2);
+        m1.logIn(c1);
+        m2.logIn(c2);
 
-        m1.crearCorreo("Asunto", "Contenido", m2);
-        m1.enviarCorreo(m2);
-        m1.crearCorreo("Asunto2", "Contenido2", m2);
-        m1.enviarCorreo(m2);
+        m1.crearCorreo("Asunto", "Contenido", c2);
+        m1.enviarCorreo(c2);
+        m1.crearCorreo("Asunto2", "Contenido2", c2);
+        m1.enviarCorreo(c2);
 
         ArrayList<Correo> resultado = m2.getBandeja().buscarCorreoPorRemitente("nombre@outlook.com");
 
@@ -65,15 +70,17 @@ public class BandejaTest {
 
     @Test
     public void testDeFiltroDeDestinatarios() {
-        Contacto c1 = new Contacto("Nombre", "nombre@outlook.com");
-        Contacto c2 = new Contacto("Nombre 2", "nombre2@outlook.com");
-        Mail m1 = new Mail(c1);
-        Mail m2 = new Mail(c2);
+        Mail m1 = new Mail();
+        Mail m2 = new Mail();
+        Contacto c1 = new Contacto("Nombre", "nombre@outlook.com",m1);
+        Contacto c2 = new Contacto("Nombre 2", "nombre2@outlook.com",m2);
+        m1.logIn(c1);
+        m2.logIn(c2);
 
-        m1.crearCorreo("Asunto", "Contenido", m2);
-        m1.enviarCorreo(m2);
-        m1.crearCorreo("Asunto2", "Contenido2", m2);
-        m1.enviarCorreo(m2);
+        m1.crearCorreo("Asunto", "Contenido", c2);
+        m1.enviarCorreo(c2);
+        m1.crearCorreo("Asunto2", "Contenido2", c2);
+        m1.enviarCorreo(c2);
 
         ArrayList<Correo> resultado = m2.getBandeja().buscarCorreoPorDestinatarios("nombre2@outlook.com");
 

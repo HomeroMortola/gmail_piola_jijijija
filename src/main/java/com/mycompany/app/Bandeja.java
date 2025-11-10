@@ -8,22 +8,24 @@ public class Bandeja {
     private ArrayList<Correo> bandejaDeEntrada;
     private ArrayList<Correo> bandejaBorradores;
 
+    
     public Bandeja() {
-        setbandejaDeEntrada();
-        setbandejaEnviados();
-        setBandejaBorradores();
+        setBandejaDeEntrada(new ArrayList<>());
+        setBandejaBorradores(new ArrayList<>());
+        setBandejaEnviados(new ArrayList<>());
+
     }
 
-    private void setbandejaDeEntrada() {
-        this.bandejaDeEntrada = new ArrayList<Correo>();
+    private void setBandejaBorradores(ArrayList<Correo> bandejaBorradores) {
+        this.bandejaBorradores = bandejaBorradores;
     }
 
-    private void setbandejaEnviados() {
-        this.bandejaEnviados = new ArrayList<Correo>();
+    private void setBandejaDeEntrada(ArrayList<Correo> bandejaDeEntrada) {
+        this.bandejaDeEntrada = bandejaDeEntrada;
     }
 
-    private void setBandejaBorradores() {
-        this.bandejaBorradores = new ArrayList<Correo>();
+    private void setBandejaEnviados(ArrayList<Correo> bandejaEnviados) {
+        this.bandejaEnviados = bandejaEnviados;
     }
 
     public ArrayList<Correo> getBandejaEnviados() {
