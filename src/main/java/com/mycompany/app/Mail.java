@@ -1,16 +1,25 @@
 package com.mycompany.app;
 
+import java.util.ArrayList;
+
 public class Mail {
     private Correo correoActual;
     private Bandeja bandejas;
     private Contacto contactoPropio;
+    private ArrayList<Contacto> contactos;
 
-    public Mail(Contacto contactoPropio) {
-        setContactoPropio(contactoPropio);
+    public Mail() {
+        
         setBandejas();
+        setContactos(new ArrayList<>());
+        
     }
 
-    public void setContactoPropio(Contacto contactoPropio) {
+    private void setContactos(ArrayList<Contacto> contactos) {
+        this.contactos = contactos;
+    }
+
+    private  void setContactoPropio(Contacto contactoPropio) {
         this.contactoPropio = contactoPropio;
     }
 
@@ -18,7 +27,7 @@ public class Mail {
         return contactoPropio;
     }
 
-    public void setCorreoActual(Correo correoActual) {
+    private void setCorreoActual(Correo correoActual) {
         this.correoActual = correoActual;
     }
 
@@ -34,28 +43,32 @@ public class Mail {
         return bandejas;
     }
 
-    public void crearCorreo(String asunto, String mensaje, Mail destinatario){
+    public void crearCorreo(String asunto, String mensaje, Contacto destinatario){
         setCorreoActual(new Correo( asunto, 
                                     mensaje,
                                     getContactoPropio().getCorreo(),
-                                    destinatario.getContactoPropio().getCorreo())); 
+                                    destinatario.getCorreo())); 
     }
 
     public void enviarABorrador(){
-        this.bandejas.getBandejaBorradores().add(correoActual);
+        this.bandejas.getBandejaBorradores().add(this.correoActual);
+    }
+
+    public void logIn(Contacto contactoPropio){
+        setContactoPropio(contactoPropio);
     }
 
 
-    public void enviarCorreo( Mail destinatario) {
+    public void enviarCorreo(Contacto destinatario) {
         Correo correo2 = getCorreoActual();
         this.bandejas.getBandejaEnviados().add(getCorreoActual());
-        destinatario.recibirCorreo(correo2);
+        destinatario.getMail().recibirCorreo(correo2);
     }
 
-    public void enviarCorreo(Correo correo, Mail destinatario) {
+    public void enviarCorreo(Correo correo, Contacto destinatario) {
         Correo correo2 = correo;
         this.bandejas.getBandejaEnviados().add(correo);
-        destinatario.recibirCorreo(correo2);
+        destinatario.getMail().recibirCorreo(correo2);
     }
 
     public void recibirCorreo(Correo correo) {
