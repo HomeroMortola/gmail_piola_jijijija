@@ -15,7 +15,7 @@ public class MailTest {
 
         m1.enviarCorreo(co1, m1);
 
-        assertEquals(m1.getBandejaEnviados().get(0), co1);
+        assertEquals(m1.bandejas.getBandejaEnviados().get(0), co1);
     }
     @Test
     public void testEnviarYRrecibirCorreo(){
