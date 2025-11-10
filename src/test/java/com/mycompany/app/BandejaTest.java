@@ -22,7 +22,7 @@ public class BandejaTest {
         m1.crearCorreo("Asunto2", "Contenido2", c2);
         m1.enviarCorreo(c2);
 
-        ArrayList<Correo> resultado = m2.getBandeja().buscarCorreoPorAsunto("Asunto");
+        ArrayList<Correo> resultado = m2.getBandeja().buscarCorreo("Asunto");
 
         assertEquals("Debe devolver dos correos con el asunto 'asunto'", resultado.size(), 2);
         assertEquals("Asunto", resultado.get(0).getAsunto());
@@ -42,7 +42,7 @@ public class BandejaTest {
         m1.crearCorreo("Asunto2", "Contenido2", c2);
         m1.enviarCorreo(c2);
 
-        ArrayList<Correo> resultado = m2.getBandeja().buscarCorreoPorContenido("Contenido");
+        ArrayList<Correo> resultado = m2.getBandeja().buscarCorreo("Contenido");
 
         assertEquals("Debe devolver dos correos con el contenido 'contenido'", resultado.size(), 2);
         assertEquals("Contenido", resultado.get(0).getContenido());
@@ -62,7 +62,7 @@ public class BandejaTest {
         m1.crearCorreo("Asunto2", "Contenido2", c2);
         m1.enviarCorreo(c2);
 
-        ArrayList<Correo> resultado = m2.getBandeja().buscarCorreoPorRemitente("nombre@outlook.com");
+        ArrayList<Correo> resultado = m2.getBandeja().buscarCorreo("nombre@outlook.com");
 
         assertEquals("Debe devolver dos correos con el remitente 'nombre@outlook.com'", resultado.size(), 2);
         assertEquals("nombre@outlook.com", resultado.get(0).getRemitente());
@@ -82,7 +82,7 @@ public class BandejaTest {
         m1.crearCorreo("Asunto2", "Contenido2", c2);
         m1.enviarCorreo(c2);
 
-        ArrayList<Correo> resultado = m2.getBandeja().buscarCorreoPorDestinatarios("nombre2@outlook.com");
+        ArrayList<Correo> resultado = m2.getBandeja().buscarCorreo("nombre2@outlook.com");
 
         assertEquals("Debe devolver dos correos con el destinatario 'nombre@outlook.com'", resultado.size(), 2);
         assertEquals("nombre2@outlook.com", resultado.get(0).getDestinatarios());
