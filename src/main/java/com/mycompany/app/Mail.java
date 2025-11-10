@@ -7,7 +7,7 @@ public class Mail {
 
     public Mail(Contacto contactoPropio) {
         setContactoPropio(contactoPropio);
-        this.bandejas = new Bandeja(){};
+        setBandejas();
     }
 
     public void setContactoPropio(Contacto contactoPropio) {
@@ -24,6 +24,14 @@ public class Mail {
 
     public Correo getCorreoActual() {
         return correoActual;
+    }
+
+    private void setBandejas() {
+        this.bandejas = new Bandeja(){};
+    }
+
+    public Bandeja getBandeja() {
+        return bandejas;
     }
 
     public void crearCorreo(String asunto, String mensaje, Mail destinatario){

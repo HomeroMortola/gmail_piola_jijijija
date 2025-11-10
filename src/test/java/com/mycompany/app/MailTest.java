@@ -15,7 +15,7 @@ public class MailTest {
 
         m1.enviarCorreo(co1, m1);
 
-        assertEquals(m1.bandejas.getBandejaEnviados().get(0), co1);
+        assertEquals(m1.getBandeja().getBandejaEnviados().get(0), co1);
     }
     @Test
     public void testEnviarYRrecibirCorreo(){
@@ -28,7 +28,7 @@ public class MailTest {
 
         m1.enviarCorreo(co1,m2);
 
-        assertEquals(m2.getBandejaDeEntrada().get(0), co1);
+        assertEquals(m2.getBandeja().getBandejaDeEntrada().get(0), co1);
     }
     @Test
     public void testCrearCorreo(){
@@ -41,7 +41,7 @@ public class MailTest {
 
         m1.enviarCorreo(m2);
 
-        assertNotNull(m2.getBandejaDeEntrada().get(0));
+        assertNotNull(m2.getBandeja().getBandejaDeEntrada().get(0));
     }
     @Test 
     public void testBandejaDeBorradores(){
@@ -52,7 +52,7 @@ public class MailTest {
 
         m1.enviarABorrador();
 
-        assertNotNull(m1.getBandejaBorradores().get(0));
+        assertNotNull(m1.getBandeja().getBandejaBorradores().get(0));
     }
     @Test
     public void testCorreoMantieneContenido(){
@@ -65,10 +65,10 @@ public class MailTest {
 
         m1.enviarCorreo(m2);
 
-        assertEquals(m2.getBandejaDeEntrada().get(0).getAsunto(),"Asunto");
-        assertEquals(m2.getBandejaDeEntrada().get(0).getContenido(),"Contenido");
-        assertEquals(m2.getBandejaDeEntrada().get(0).getRemitente(),"nombre@outlook.com");
-        assertEquals(m2.getBandejaDeEntrada().get(0).getDestinatarios(),"nombre2@outlook.com");
+        assertEquals(m2.getBandeja().getBandejaDeEntrada().get(0).getAsunto(),"Asunto");
+        assertEquals(m2.getBandeja().getBandejaDeEntrada().get(0).getContenido(),"Contenido");
+        assertEquals(m2.getBandeja().getBandejaDeEntrada().get(0).getRemitente(),"nombre@outlook.com");
+        assertEquals(m2.getBandeja().getBandejaDeEntrada().get(0).getDestinatarios(),"nombre2@outlook.com");
     
     }
 }
