@@ -88,4 +88,23 @@ public class Bandeja {
                                                                         .collect(Collectors.toList()));
         return correo;
     }
+
+    //Filtro Todo
+    public Predicate<Correo> considerarTodo(String texto) {
+        return  considerarContenidoDelCorreo(texto)
+                                .or(considerarRemitenteDelCorreo(texto))
+                                .or(considerarAsuntoDelCorreo(texto))
+                                .or(considerarDestinatariosDelCorreo(texto));
+    }
+
+
+    public ArrayList<Correo> buscarCorreo(String texto) {
+        ArrayList<Correo> correo = new ArrayList<>(this.bandejaDeEntrada.stream()
+                                                                        .filter(considerarTodo(texto))
+                                                                        .collect(Collectors.toList()));
+        return correo;
+    }
+
+    
+
 }

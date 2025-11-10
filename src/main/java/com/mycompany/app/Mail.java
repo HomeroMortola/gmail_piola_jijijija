@@ -32,7 +32,7 @@ public class Mail {
     }
 
     public Correo getCorreoActual() {
-        return correoActual;
+        return this.correoActual;
     }
 
     private void setBandejas() {
@@ -40,7 +40,11 @@ public class Mail {
     }
 
     public Bandeja getBandeja() {
-        return bandejas;
+        return this.bandejas;
+    }
+
+    public void logIn(Contacto contactoPropio){
+        setContactoPropio(contactoPropio);
     }
 
     public void crearCorreo(String asunto, String mensaje, Contacto destinatario){
@@ -48,16 +52,12 @@ public class Mail {
                                     mensaje,
                                     getContactoPropio().getCorreo(),
                                     destinatario.getCorreo())); 
+        enviarABorrador();                        
     }
 
     public void enviarABorrador(){
         this.bandejas.getBandejaBorradores().add(this.correoActual);
     }
-
-    public void logIn(Contacto contactoPropio){
-        setContactoPropio(contactoPropio);
-    }
-
 
     public void enviarCorreo(Contacto destinatario) {
         Correo correo2 = getCorreoActual();
