@@ -1,5 +1,4 @@
 package com.mycompany.app;
-import java.util.ArrayList;
 
 public class Mail {
     private Correo correoActual;
@@ -8,6 +7,7 @@ public class Mail {
 
     public Mail(Contacto contactoPropio) {
         setContactoPropio(contactoPropio);
+        this.bandejas = new Bandeja(){};
     }
 
     public void setContactoPropio(Contacto contactoPropio) {
@@ -39,18 +39,20 @@ public class Mail {
 
 
     public void enviarCorreo( Mail destinatario) {
+        Correo correo2 = getCorreoActual();
         this.bandejas.getBandejaEnviados().add(getCorreoActual());
-        destinatario.recibirCorreo(getCorreoActual());
+        destinatario.recibirCorreo(correo2);
     }
 
     public void enviarCorreo(Correo correo, Mail destinatario) {
+        Correo correo2 = correo;
         this.bandejas.getBandejaEnviados().add(correo);
-        destinatario.recibirCorreo(correo);
+        destinatario.recibirCorreo(correo2);
     }
 
     public void recibirCorreo(Correo correo) {
         this.bandejas.getBandejaDeEntrada().add(correo);
     }
-
+   
 
 }
