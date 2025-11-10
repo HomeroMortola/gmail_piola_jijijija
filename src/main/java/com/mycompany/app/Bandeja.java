@@ -1,7 +1,7 @@
 package com.mycompany.app;
 import java.util.ArrayList;
 
-public abstract class Bandeja {
+public class Bandeja {
     private ArrayList<Correo> bandejaEnviados; //convertir en clase con interfas "bandeja"
     private ArrayList<Correo> bandejaDeEntrada;
     private ArrayList<Correo> bandejaBorradores;
