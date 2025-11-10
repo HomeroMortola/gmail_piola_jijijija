@@ -77,6 +77,22 @@ public class Bandeja {
         return correo;
     }
 
-    
+    //Filtro ignorar
+    public ArrayList<Correo> filtroCorreoIgnorado() {
+        ArrayList<Correo> correo = new ArrayList<>(this.bandejaDeEntrada.stream()
+                                                                        .filter(considerarRemitenteDelCorreo("@afip.gob.ar"))
+                                                                        .filter(considerarAsuntoDelCorreo("impuestos"))
+                                                                        .collect(Collectors.toList()));
+        return correo;
+    }
+
+    //Filtro descuento de Steam
+    public ArrayList<Correo> filtroDescuentoSteam() {
+        ArrayList<Correo> correo = new ArrayList<>(this.bandejaDeEntrada.stream()
+                                                                        .filter(considerarRemitenteDelCorreo("noreply@steampowered.com"))
+                                                                        .filter(considerarAsuntoDelCorreo("oferta"))
+                                                                        .collect(Collectors.toList()));
+        return correo;
+    }
 
 }

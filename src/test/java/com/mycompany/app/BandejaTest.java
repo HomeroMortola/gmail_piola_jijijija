@@ -87,4 +87,46 @@ public class BandejaTest {
         assertEquals("Debe devolver dos correos con el destinatario 'nombre@outlook.com'", resultado.size(), 2);
         assertEquals("nombre2@outlook.com", resultado.get(0).getDestinatarios());
     }
+
+    @Test
+    public void testDeFiltroIgnorarCorreos() {
+        Mail m1 = new Mail();
+        Mail m2 = new Mail();
+        Contacto c1 = new Contacto("AFIP", "nombre@afip.gob.ar",m1);
+        Contacto c2 = new Contacto("Nombre 2", "nombre2@outlook.com",m2);
+        m1.logIn(c1);
+        m2.logIn(c2);
+
+        m1.crearCorreo("Impuestos adeudados 05/11/2025", "Contenido", c2);
+        m1.enviarCorreo(c2);
+        m1.crearCorreo("Asunto2", "Contenido2", c2);
+        m1.enviarCorreo(c2);
+
+        ArrayList<Correo> resultado = m2.getBandeja().filtroCorreoIgnorado();
+
+        assertEquals("Debe devolver dos correos con el remitente 'nombre@afip.gob.ar' y con asunto 'Impuestos'", resultado.size(), 1);
+        assertEquals("nombre@afip.gob.ar", resultado.get(0).getRemitente());
+        assertEquals("Impuestos adeudados 05/11/2025", resultado.get(0).getAsunto());
+    }
+
+    @Test
+    public void testDeFiltroDescuentoDeSteam() {
+        Mail m1 = new Mail();
+        Mail m2 = new Mail();
+        Contacto c1 = new Contacto("Steam", "noreply@steampowered.com",m1);
+        Contacto c2 = new Contacto("Nombre 2", "nombre2@outlook.com",m2);
+        m1.logIn(c1);
+        m2.logIn(c2);
+
+        m1.crearCorreo("¡Enshrouded, 3 y otros artículos de tu lista de deseados de Steam ahora están en oferta!", "¡AHORRA YA EN 4 JUEGOS QUE DESEAS!", c2);
+        m1.enviarCorreo(c2);
+        m1.crearCorreo("Asunto2", "Contenido2", c2);
+        m1.enviarCorreo(c2);
+
+        ArrayList<Correo> resultado = m2.getBandeja().filtroDescuentoSteam();
+
+        assertEquals("Debe devolver dos correos con el remitente 'noreply@steampowered.com' y con asunto 'Oferta'", resultado.size(), 1);
+        assertEquals("noreply@steampowered.com", resultado.get(0).getRemitente());
+        assertEquals("¡Enshrouded, 3 y otros artículos de tu lista de deseados de Steam ahora están en oferta!", resultado.get(0).getAsunto());
+    }
 }
