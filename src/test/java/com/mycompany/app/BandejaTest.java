@@ -176,6 +176,30 @@ public class BandejaTest {
     }
 
     @Test
+    public void testDeFiltroCorreosImportantes() {
+        Mail m1 = new Mail();
+        Mail m2 = new Mail();
+        Mail m3 = new Mail();
+        Contacto c1 = new Contacto("UCP Avisos", "nombre@laburo.com",m1);
+        Contacto c2 = new Contacto("Nombre 2", "nombre2@outlook.com",m2);
+        Contacto c3 = new Contacto("Nombre 3", "nombre3@outlook.com",m3);
+        m1.logIn(c1);
+        m2.logIn(c2);
+        m2.logIn(c3);
+
+        m1.crearCorreo("[Importante] Recibo de sueldo 01/11/25", "Contenido", c3);
+        m1.enviarCorreo(c3);
+        m2.crearCorreo("Dale amigo en serio", "En serio te lo estoy pidiendo, devolveme la plata!", c3);
+        m2.enviarCorreo(c3);
+
+        ArrayList<Correo> resultado = m3.getBandeja().filtroCorreosImportantes();
+
+        assertEquals("Debe devolver un correo con el asunto 'Importante'", resultado.size(), 1);
+        assertEquals("nombre@laburo.com", resultado.get(0).getRemitente());
+        assertEquals("[Importante] Recibo de sueldo 01/11/25", resultado.get(0).getAsunto());
+    }
+
+    @Test
     public void testMarcarFavorito(){
         Mail m1 = new Mail();
         Mail m2 = new Mail();

@@ -137,6 +137,14 @@ public class Bandeja {
         return correo;
     }
 
+    //Filtro correos Importantes
+    public ArrayList<Correo> filtroCorreosImportantes() {
+        ArrayList<Correo> correo = new ArrayList<>(this.bandejaDeEntrada.stream()
+                                                                        .filter(considerarAsuntoDelCorreo("importante"))
+                                                                        .collect(Collectors.toList()));
+        return correo;
+    }
+
     public void mober(Correo correo, ArrayList<Correo> destino){
         switch (correo.getUbicacion()) {
             case 1:
