@@ -59,16 +59,21 @@ public class Mail {
         this.bandejas.getBandejaBorradores().add(this.correoActual);
     }
 
-    public void enviarCorreo(Contacto destinatario) {
-        Correo correo2 = getCorreoActual();
-        this.bandejas.getBandejaEnviados().add(getCorreoActual());
-        destinatario.getMail().recibirCorreo(correo2);
+    public void enviarCorreo(Contacto... destinatarios) {
+        for (Contacto n : destinatarios) {
+            Correo correo2 = getCorreoActual();
+            this.bandejas.getBandejaEnviados().add(getCorreoActual());
+            n.getMail().recibirCorreo(correo2);
+        }
+        
     }
 
-    public void enviarCorreo(Correo correo, Contacto destinatario) {
-        Correo correo2 = correo;
-        this.bandejas.getBandejaEnviados().add(correo);
-        destinatario.getMail().recibirCorreo(correo2);
+    public void enviarCorreo(Correo correo, Contacto... destinatarios) {
+        for (Contacto n : destinatarios) {
+            Correo correo2 = correo;
+            this.bandejas.getBandejaEnviados().add(correo);
+            n.getMail().recibirCorreo(correo2);
+        }
     }
 
     public void recibirCorreo(Correo correo) {
