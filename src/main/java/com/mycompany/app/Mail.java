@@ -43,6 +43,12 @@ public class Mail {
         return this.bandejas;
     }
 
+    public ArrayList<Contacto> getContactos(){
+        return this.contactos;
+    }
+
+
+
     public void logIn(Contacto contactoPropio){
         setContactoPropio(contactoPropio);
     }
