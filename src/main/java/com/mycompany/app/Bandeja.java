@@ -142,9 +142,7 @@ public class Bandeja {
             
     }
 
-    public void eliminarCorreos(Correo correo){
-        
-    }
+    
         
     
 

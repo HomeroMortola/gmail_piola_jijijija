@@ -71,7 +71,6 @@ public class MailTest {
         Correo co1 = new Correo("Asunto","Contenido",c1.getCorreo(),c2.getCorreo());
 
         m1.enviarCorreo(co1,m2.getContactoPropio());
-
         m1.getBandeja().getBandejaEnviados().get(0).setFavorito(true);
 
         assertNotEquals(m2.getBandeja().getBandejaDeEntrada().get(0).getFavorito(), m1.getBandeja().getBandejaEnviados().get(0));

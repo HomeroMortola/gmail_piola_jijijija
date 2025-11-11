@@ -95,6 +95,35 @@ public class Mail {
         correo.setFavorito(false);
     }
 
+    public void eliminarCorreos(Correo correo){ 
+        correo.setUbicacionPrevia(correo.getUbicacion());
+        getBandeja().mober(correo, getBandeja().getBandejaEliminados());
+        correo.setUbicacion(4);
+    }
+
+    public void restaurarCorreos(Correo correo){ 
+        
+        switch (correo.getUbicacionPrevia()) {
+            case 1:
+                getBandeja().mober(correo, getBandeja().getBandejaDeEntrada());
+                break;
+            case 2:
+                getBandeja().mober(correo, getBandeja().getBandejaEnviados());
+                break;
+            case 3:
+                getBandeja().mober(correo, getBandeja().getBandejaBorradores());
+                break;
+            default:
+                break;
+        }
+        correo.setUbicacion(correo.getUbicacionPrevia());   
+        correo.setUbicacionPrevia(0);
+        
+    }
+
+
+
+
 
    
 

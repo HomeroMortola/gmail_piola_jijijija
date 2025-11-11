@@ -3,9 +3,6 @@ package com.mycompany.app;
 import java.util.ArrayList;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertNull;
-
 import org.junit.Test;
 
 public class BandejaTest {
@@ -132,7 +129,6 @@ public class BandejaTest {
         assertEquals("noreply@steampowered.com", resultado.get(0).getRemitente());
         assertEquals("¡Enshrouded, 3 y otros artículos de tu lista de deseados de Steam ahora están en oferta!", resultado.get(0).getAsunto());
     }
-
     @Test
     public void testMarcarFavorito(){
         Mail m1 = new Mail();
@@ -143,20 +139,38 @@ public class BandejaTest {
         m2.logIn(c2);
         
         Correo co1 = new Correo("Asunto","Contenido",c1.getCorreo(),c2.getCorreo());
-
         m1.enviarCorreo(co1,m2.getContactoPropio());
-
         m1.marcarFavorito(co1);
 
-        assertEquals("",co1,m1.getBandeja().getBandejaFavoritos().get(0));
+        assertEquals("Los correos deven ser el mismo",co1,m1.getBandeja().getBandejaFavoritos().get(0));
+
         m1.marcarNoFavorito(co1);
-        assertEquals("",0,m1.getBandeja().getBandejaFavoritos().size());
-
-        
-        
-
-
-
+        assertEquals("El tamaño de la bandeja de favoritos deve ser 0",0,m1.getBandeja().getBandejaFavoritos().size());
 
     }
+    @Test
+    public void testBorradoYRecuperacionDeCorreo(){
+        Mail m1 = new Mail();
+        Mail m2 = new Mail();
+        Contacto c1 = new Contacto("Steam", "noreply@steampowered.com",m1);
+        Contacto c2 = new Contacto("Nombre 2", "nombre2@outlook.com",m2);
+        m1.logIn(c1);
+        m2.logIn(c2);
+
+        Correo co1 = new Correo("Asunto","Contenido",c1.getCorreo(),c2.getCorreo());
+        m1.enviarCorreo(co1,c2);
+        
+        m1.eliminarCorreos(co1);
+
+        assertEquals("Los correos deven ser el mismo",co1,m1.getBandeja().getBandejaEliminados().get(0));   
+        assertEquals("Los correos deven ser el mismo",co1,m2.getBandeja().getBandejaDeEntrada().get(0));     
+        assertEquals("El tamaño de la bandeja de enviados deve ser 0",0,m1.getBandeja().getBandejaEnviados().size());
+
+        m1.restaurarCorreos(co1);
+   
+        assertEquals("El tamaño de la bandeja de enviados deve ser 0",0,m1.getBandeja().getBandejaEliminados().size());
+        assertEquals("Los correos deven ser el mismo",co1,m1.getBandeja().getBandejaEnviados().get(0));  
+        
+    }
+
 }
