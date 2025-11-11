@@ -9,6 +9,7 @@ public class Correo {
     private int ubicacion; //0 = niguna / 1 = entrada / 2 = enviados / 3 = borrador / 4 = eliminado 
     private int ubicacionPrevia;
     private boolean favorito;
+    private boolean leido;
 
     public Correo(String asunto, String contenido, String remitente, String destinatarios) {
         setAsunto(asunto);
@@ -17,6 +18,7 @@ public class Correo {
         setDestinatarios(destinatarios);
         setUbicacion(0);
         setUbicacionPrevia(0);
+        setLeido(false);
     }
 
     //set
@@ -46,6 +48,10 @@ public class Correo {
 
     public void setFavorito(boolean favorito) {
         this.favorito = favorito;
+    }
+
+    public void setLeido(boolean leido) {
+        this.leido = leido;
     }
 
     
@@ -79,6 +85,9 @@ public class Correo {
         return this.favorito;
     }
 
+    protected boolean getLeido(){
+        return this.leido;
+    }
 
     
 }

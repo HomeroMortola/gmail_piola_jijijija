@@ -1,8 +1,10 @@
 package com.mycompany.app;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 public class MailTest {
@@ -33,10 +35,11 @@ public class MailTest {
 
         m1.enviarCorreo(co1,m2.getContactoPropio());
 
-        assertEquals(m2.getBandeja().getBandejaDeEntrada().get(0), co1);
         assertEquals(m1.getBandeja().getBandejaEnviados().get(0), co1);
+        assertEquals(m2.getBandeja().getBandejaDeEntrada().size(),1 );
+        
     }
-     @Test
+    @Test
     public void testEnviarYRrecibirCorreoMultiple(){
         Mail m1 = new Mail();
         Mail m2 = new Mail();
@@ -54,8 +57,8 @@ public class MailTest {
         m1.enviarCorreo(co1,c2,c3);
 
         assertEquals(m1.getBandeja().getBandejaEnviados().get(0), co1);
-        assertEquals(m2.getBandeja().getBandejaDeEntrada().get(0), co1);
-        assertEquals(m3.getBandeja().getBandejaDeEntrada().get(0), co1);
+        assertEquals(m2.getBandeja().getBandejaDeEntrada().size(),1);
+        assertEquals(m3.getBandeja().getBandejaDeEntrada().size(),1);
     }
 
     @Test
@@ -73,7 +76,7 @@ public class MailTest {
         m1.enviarCorreo(co1,m2.getContactoPropio());
         m1.getBandeja().getBandejaEnviados().get(0).setFavorito(true);
 
-        assertNotEquals(m2.getBandeja().getBandejaDeEntrada().get(0).getFavorito(), m1.getBandeja().getBandejaEnviados().get(0));
+        assertNotEquals(m2.getBandeja().getBandejaDeEntrada().get(0).getFavorito(), m1.getBandeja().getBandejaEnviados().get(0).getFavorito());
         
     }
     @Test
@@ -140,5 +143,22 @@ public class MailTest {
         assertEquals(1,m2.getBandeja().getBandejaDeEntrada().size() );
         assertEquals(1,m1.getBandeja().getBandejaEnviados().size() );
 
+    }
+    @Test
+    public void testMensajeLeido(){
+        Mail m1 = new Mail();
+        Mail m2 = new Mail();
+        Contacto c1 = new Contacto("Nombre", "nombre@outlook.com",m1);
+        Contacto c2 = new Contacto("Nombre 2", "nombre2@outlook.com",m2);
+        m1.logIn(c1);
+        m2.logIn(c2);
+
+        Correo co1 = new Correo("Asunto","Contenido",c1.getCorreo(),c2.getCorreo());
+
+        m1.enviarCorreo(co1,m2.getContactoPropio());
+        assertFalse(co1.getLeido());
+        m1.leerCorreo(m1.getBandeja().getBandejaEnviados().get(0));
+        assertTrue(co1.getLeido());
+        assertFalse((m2.getBandeja().getBandejaDeEntrada().get(0).getLeido()));
     }
 }

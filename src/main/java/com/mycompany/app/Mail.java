@@ -62,8 +62,12 @@ public class Mail {
 
     public void enviarCorreo(Contacto... destinatarios) {
         for (Contacto n : destinatarios) {
-            Correo correo2 = getCorreoActual();
-            n.getMail().recibirCorreo(correo2);
+            // Crear una copia del correo en lugar de enviar el original
+            Correo copia = new Correo(getCorreoActual().getAsunto(),
+                                      getCorreoActual().getContenido(),
+                                      getCorreoActual().getRemitente(),
+                                      n.getCorreo());
+            n.getMail().recibirCorreo(copia);
         }
         getBandeja().mober(getCorreoActual(),getBandeja().getBandejaEnviados());
         getCorreoActual().setUbicacion(2);
@@ -73,8 +77,12 @@ public class Mail {
 
     public void enviarCorreo(Correo correo, Contacto... destinatarios) {
         for (Contacto n : destinatarios) {
-            Correo correo2 = correo;
-            n.getMail().recibirCorreo(correo2);
+            // Crear una copia del correo en lugar de enviar el original
+            Correo copia = new Correo(correo.getAsunto(),
+                                      correo.getContenido(),
+                                      correo.getRemitente(),
+                                      n.getCorreo());
+            n.getMail().recibirCorreo(copia);
         }
         this.bandejas.getBandejaEnviados().add(correo);
         correo.setUbicacion(2);
@@ -119,6 +127,14 @@ public class Mail {
         correo.setUbicacion(correo.getUbicacionPrevia());   
         correo.setUbicacionPrevia(0);
         
+    }
+
+    public void leerCorreo(Correo correo){
+        correo.setLeido(true);
+    }
+
+    public boolean  getLeido(Correo correo){
+        return correo.getLeido();
     }
 
 
