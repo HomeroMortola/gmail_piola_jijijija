@@ -63,9 +63,11 @@ public class Mail {
     public void enviarCorreo(Contacto... destinatarios) {
         for (Contacto n : destinatarios) {
             Correo correo2 = getCorreoActual();
-            this.bandejas.getBandejaEnviados().add(getCorreoActual());
             n.getMail().recibirCorreo(correo2);
+            getBandeja().mober(getCorreoActual(),getBandeja().getBandejaEnviados());
             getCorreoActual().setUbicacion(2);
+            setCorreoActual(null);
+            
             
         }
         
@@ -84,6 +86,16 @@ public class Mail {
     public void recibirCorreo(Correo correo) {
         this.bandejas.getBandejaDeEntrada().add(correo);
         correo.setUbicacion(1);
+    }
+
+    public void marcarFavorito(Correo correo){
+        this.bandejas.getBandejaFavoritos().add(correo);
+        correo.setFavorito(true);
+    }
+
+    public void marcarNoFavorito(Correo correo){
+        this.bandejas.getBandejaFavoritos().remove(correo);
+        correo.setFavorito(false);
     }
 
 

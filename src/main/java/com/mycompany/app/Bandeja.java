@@ -8,6 +8,7 @@ public class Bandeja {
     private ArrayList<Correo> bandejaDeEntrada;
     private ArrayList<Correo> bandejaBorradores;
     private ArrayList<Correo> bandejaEliminados;
+    private ArrayList<Correo> bandejaFavoritos;
 
     
     public Bandeja() {
@@ -15,6 +16,7 @@ public class Bandeja {
         setBandejaBorradores(new ArrayList<>());
         setBandejaEnviados(new ArrayList<>());
         setBandejaEliminados(new ArrayList<>());
+        setBandejaFavoritos(new ArrayList<>());
     }
 
     //set
@@ -34,6 +36,10 @@ public class Bandeja {
         this.bandejaEliminados = bandejaEliminados;
     }
 
+    private void setBandejaFavoritos(ArrayList<Correo> bandejaFavoritos) {
+        this.bandejaFavoritos = bandejaFavoritos;
+    }
+
     //get
     public ArrayList<Correo> getBandejaEnviados() {
         return this.bandejaEnviados;
@@ -51,6 +57,12 @@ public class Bandeja {
     public ArrayList<Correo> getBandejaEliminados() {
         return this.bandejaEliminados;
     }
+
+    public ArrayList<Correo> getBandejaFavoritos() {
+        return this.bandejaFavoritos;
+    }
+
+    
 
     
 
@@ -106,6 +118,28 @@ public class Bandeja {
                                                                         .filter(considerarAsuntoDelCorreo("oferta"))
                                                                         .collect(Collectors.toList()));
         return correo;
+    }
+
+    public void mober(Correo correo, ArrayList<Correo> destino){
+        switch (correo.getUbicacion()) {
+            case 1:
+                getBandejaDeEntrada().remove(correo);
+                break;
+            case 2:
+                getBandejaEnviados().remove(correo);
+                break;
+            case 3:
+                getBandejaBorradores().remove(correo);
+                break;
+            case 4:
+                getBandejaEliminados().remove(correo);
+                break;
+            default:
+                break;
+        }
+        destino.add(correo);
+        
+            
     }
 
     public void eliminarCorreos(Correo correo){

@@ -6,8 +6,9 @@ public class Correo {
     private String contenido;
     private String remitente;
     private String destinatarios;
-    private int ubicacion; //0 = niguna / 1 = entrada / 2 = enviados / 3 = borrador / 4 = eliminado
+    private int ubicacion; //0 = niguna / 1 = entrada / 2 = enviados / 3 = borrador / 4 = eliminado 
     private int ubicacionPrevia;
+    private boolean favorito;
 
     public Correo(String asunto, String contenido, String remitente, String destinatarios) {
         setAsunto(asunto);
@@ -43,6 +44,12 @@ public class Correo {
         this.ubicacionPrevia = ubicacionPrevia;
     }
 
+    public void setFavorito(boolean favorito) {
+        this.favorito = favorito;
+    }
+
+    
+
     //get
     public String getAsunto() {
         return this.asunto;
@@ -66,6 +73,10 @@ public class Correo {
 
     public int getUbicacionPrevia() {
         return this.ubicacionPrevia;
+    }
+
+    public boolean getFavorito() {
+        return this.favorito;
     }
 
 
