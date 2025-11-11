@@ -4,6 +4,7 @@ public class Contacto {
     private String nombre;
     private String correo;
     private Mail mail;
+    
 
 
     public Contacto(String nombre, String correo, Mail mail) {
@@ -11,8 +12,6 @@ public class Contacto {
         setCorreo(correo);
         setMail(mail);
     }
-
-    
 
     //Set
     private void setNombre(String nombre) {
@@ -23,22 +22,29 @@ public class Contacto {
         this.correo = correo;
     }
 
-    public void setMail(Mail mail) {
+    private void setMail(Mail mail) {
         this.mail = mail;
     }
 
+    
+
     //Get
     protected String getNombre() {
-        return nombre;
+        return this.nombre;
     }
 
     protected String getCorreo() {
-        return correo;
+        return this.correo;
     }
 
     protected  Mail getMail() {
-        return mail;
+        return this.mail;
     }
+
+    
+
+    
+
 
     
     

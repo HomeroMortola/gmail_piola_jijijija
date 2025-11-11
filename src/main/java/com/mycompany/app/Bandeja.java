@@ -7,15 +7,17 @@ public class Bandeja {
     private ArrayList<Correo> bandejaEnviados; //convertir en clase con interfas "bandeja"
     private ArrayList<Correo> bandejaDeEntrada;
     private ArrayList<Correo> bandejaBorradores;
+    private ArrayList<Correo> bandejaEliminados;
 
     
     public Bandeja() {
         setBandejaDeEntrada(new ArrayList<>());
         setBandejaBorradores(new ArrayList<>());
         setBandejaEnviados(new ArrayList<>());
-
+        setBandejaEliminados(new ArrayList<>());
     }
 
+    //set
     private void setBandejaBorradores(ArrayList<Correo> bandejaBorradores) {
         this.bandejaBorradores = bandejaBorradores;
     }
@@ -28,18 +30,29 @@ public class Bandeja {
         this.bandejaEnviados = bandejaEnviados;
     }
 
+    private void setBandejaEliminados(ArrayList<Correo> bandejaEliminados) {
+        this.bandejaEliminados = bandejaEliminados;
+    }
+
+    //get
     public ArrayList<Correo> getBandejaEnviados() {
-        return bandejaEnviados;
+        return this.bandejaEnviados;
     }
 
 
     public ArrayList<Correo> getBandejaDeEntrada() {
-        return bandejaDeEntrada;
+        return this.bandejaDeEntrada;
     }
     
     public ArrayList<Correo> getBandejaBorradores() {
-        return bandejaBorradores;
+        return this.bandejaBorradores;
     }
+
+    public ArrayList<Correo> getBandejaEliminados() {
+        return this.bandejaEliminados;
+    }
+
+    
 
     //Filtro con asunto
     public Predicate<Correo> considerarAsuntoDelCorreo(String asunto) {
@@ -94,5 +107,11 @@ public class Bandeja {
                                                                         .collect(Collectors.toList()));
         return correo;
     }
+
+    public void eliminarCorreos(Correo correo){
+        
+    }
+        
+    
 
 }

@@ -6,14 +6,19 @@ public class Correo {
     private String contenido;
     private String remitente;
     private String destinatarios;
+    private int ubicacion; //0 = niguna / 1 = entrada / 2 = enviados / 3 = borrador / 4 = eliminado
+    private int ubicacionPrevia;
 
     public Correo(String asunto, String contenido, String remitente, String destinatarios) {
         setAsunto(asunto);
         setContenido(contenido);
         setRemitente(remitente);
         setDestinatarios(destinatarios);
+        setUbicacion(0);
+        setUbicacionPrevia(0);
     }
 
+    //set
     private void setAsunto(String asunto) {
         this.asunto = asunto;
     }
@@ -30,20 +35,37 @@ public class Correo {
         this.destinatarios = destinatarios;
     }
 
+    public void setUbicacion(int ubicacion) {
+        this.ubicacion = ubicacion;
+    }
+
+    public void setUbicacionPrevia(int ubicacionPrevia){
+        this.ubicacionPrevia = ubicacionPrevia;
+    }
+
+    //get
     public String getAsunto() {
-        return asunto;
+        return this.asunto;
     }
 
     public String getContenido() {
-        return contenido;
+        return this.contenido;
     }
 
     public String getRemitente(){
-        return remitente;
+        return this.remitente;
     }
 
     public String getDestinatarios() {
-        return destinatarios;
+        return this.destinatarios;
+    }
+
+    public int getUbicacion() {
+        return this.ubicacion;
+    }
+
+    public int getUbicacionPrevia() {
+        return this.ubicacionPrevia;
     }
 
 

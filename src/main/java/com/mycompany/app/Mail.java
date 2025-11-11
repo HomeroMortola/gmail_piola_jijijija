@@ -24,7 +24,7 @@ public class Mail {
     }
 
     public Contacto getContactoPropio() {
-        return contactoPropio;
+        return this.contactoPropio;
     }
 
     private void setCorreoActual(Correo correoActual) {
@@ -57,6 +57,7 @@ public class Mail {
 
     public void enviarABorrador(){
         this.bandejas.getBandejaBorradores().add(this.correoActual);
+        getCorreoActual().setUbicacion(3);
     }
 
     public void enviarCorreo(Contacto... destinatarios) {
@@ -64,6 +65,8 @@ public class Mail {
             Correo correo2 = getCorreoActual();
             this.bandejas.getBandejaEnviados().add(getCorreoActual());
             n.getMail().recibirCorreo(correo2);
+            getCorreoActual().setUbicacion(2);
+            
         }
         
     }
@@ -73,12 +76,17 @@ public class Mail {
             Correo correo2 = correo;
             this.bandejas.getBandejaEnviados().add(correo);
             n.getMail().recibirCorreo(correo2);
+            correo.setUbicacion(2);
+            
         }
     }
 
     public void recibirCorreo(Correo correo) {
         this.bandejas.getBandejaDeEntrada().add(correo);
+        correo.setUbicacion(1);
     }
+
+
    
 
 }
