@@ -1,6 +1,7 @@
 package com.mycompany.app;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
 import org.junit.Test;
 
@@ -33,6 +34,48 @@ public class MailTest {
         m1.enviarCorreo(co1,m2.getContactoPropio());
 
         assertEquals(m2.getBandeja().getBandejaDeEntrada().get(0), co1);
+        assertEquals(m1.getBandeja().getBandejaEnviados().get(0), co1);
+    }
+     @Test
+    public void testEnviarYRrecibirCorreoMultiple(){
+        Mail m1 = new Mail();
+        Mail m2 = new Mail();
+        Mail m3 = new Mail();
+        Contacto c1 = new Contacto("Nombre", "nombre@outlook.com",m1);
+        Contacto c2 = new Contacto("Nombre 2", "nombre2@outlook.com",m2);
+        Contacto c3 = new Contacto("Nombre 3", "nombre3@outlook.com",m3);
+        m1.logIn(c1);
+        m2.logIn(c2);
+        m3.logIn(c3);
+        
+
+        Correo co1 = new Correo("Asunto","Contenido",c1.getCorreo(),c2.getCorreo());
+
+        m1.enviarCorreo(co1,c2,c3);
+
+        assertEquals(m1.getBandeja().getBandejaEnviados().get(0), co1);
+        assertEquals(m2.getBandeja().getBandejaDeEntrada().get(0), co1);
+        assertEquals(m3.getBandeja().getBandejaDeEntrada().get(0), co1);
+    }
+
+    @Test
+    public void testEnviarNoEsElMismoQueRecibir(){
+        Mail m1 = new Mail();
+        Mail m2 = new Mail();
+        Contacto c1 = new Contacto("Nombre", "nombre@outlook.com",m1);
+        Contacto c2 = new Contacto("Nombre 2", "nombre2@outlook.com",m2);
+        m1.logIn(c1);
+        m2.logIn(c2);
+        
+
+        Correo co1 = new Correo("Asunto","Contenido",c1.getCorreo(),c2.getCorreo());
+
+        m1.enviarCorreo(co1,m2.getContactoPropio());
+
+        m1.getBandeja().getBandejaEnviados().get(0).setFavorito(true);
+
+        assertNotEquals(m2.getBandeja().getBandejaDeEntrada().get(0).getFavorito(), m1.getBandeja().getBandejaEnviados().get(0));
+        
     }
     @Test
     public void testCrearCorreo(){

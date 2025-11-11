@@ -3,6 +3,9 @@ package com.mycompany.app;
 import java.util.ArrayList;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertNull;
+
 import org.junit.Test;
 
 public class BandejaTest {
@@ -128,5 +131,32 @@ public class BandejaTest {
         assertEquals("Debe devolver dos correos con el remitente 'noreply@steampowered.com' y con asunto 'Oferta'", resultado.size(), 1);
         assertEquals("noreply@steampowered.com", resultado.get(0).getRemitente());
         assertEquals("¡Enshrouded, 3 y otros artículos de tu lista de deseados de Steam ahora están en oferta!", resultado.get(0).getAsunto());
+    }
+
+    @Test
+    public void testMarcarFavorito(){
+        Mail m1 = new Mail();
+        Mail m2 = new Mail();
+        Contacto c1 = new Contacto("Steam", "noreply@steampowered.com",m1);
+        Contacto c2 = new Contacto("Nombre 2", "nombre2@outlook.com",m2);
+        m1.logIn(c1);
+        m2.logIn(c2);
+        
+        Correo co1 = new Correo("Asunto","Contenido",c1.getCorreo(),c2.getCorreo());
+
+        m1.enviarCorreo(co1,m2.getContactoPropio());
+
+        m1.marcarFavorito(co1);
+
+        assertEquals("",co1,m1.getBandeja().getBandejaFavoritos().get(0));
+        m1.marcarNoFavorito(co1);
+        assertEquals("",0,m1.getBandeja().getBandejaFavoritos().size());
+
+        
+        
+
+
+
+
     }
 }

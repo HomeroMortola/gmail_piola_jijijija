@@ -64,23 +64,20 @@ public class Mail {
         for (Contacto n : destinatarios) {
             Correo correo2 = getCorreoActual();
             n.getMail().recibirCorreo(correo2);
-            getBandeja().mober(getCorreoActual(),getBandeja().getBandejaEnviados());
-            getCorreoActual().setUbicacion(2);
-            setCorreoActual(null);
-            
-            
         }
+        getBandeja().mober(getCorreoActual(),getBandeja().getBandejaEnviados());
+        getCorreoActual().setUbicacion(2);
+        setCorreoActual(null);
         
     }
 
     public void enviarCorreo(Correo correo, Contacto... destinatarios) {
         for (Contacto n : destinatarios) {
             Correo correo2 = correo;
-            this.bandejas.getBandejaEnviados().add(correo);
             n.getMail().recibirCorreo(correo2);
-            correo.setUbicacion(2);
-            
         }
+        this.bandejas.getBandejaEnviados().add(correo);
+        correo.setUbicacion(2);
     }
 
     public void recibirCorreo(Correo correo) {
