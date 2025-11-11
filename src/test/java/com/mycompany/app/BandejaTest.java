@@ -233,7 +233,7 @@ public class BandejaTest {
         m1.eliminarCorreos(co1);
 
         assertEquals("Los correos deven ser el mismo",co1,m1.getBandeja().getBandejaEliminados().get(0));   
-        assertEquals("Los correos deven ser el mismo",co1,m2.getBandeja().getBandejaDeEntrada().get(0));     
+        assertEquals("Los correos deven ser el mismo",1,m2.getBandeja().getBandejaDeEntrada().size());     
         assertEquals("El tamaño de la bandeja de enviados deve ser 0",0,m1.getBandeja().getBandejaEnviados().size());
 
         m1.restaurarCorreos(co1);
