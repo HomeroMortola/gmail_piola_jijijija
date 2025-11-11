@@ -122,4 +122,23 @@ public class MailTest {
         assertEquals(m2.getBandeja().getBandejaDeEntrada().get(0).getDestinatarios(),"nombre2@outlook.com");
     
     }
+    @Test
+    public void testCorreoVaABorrador(){
+        Mail m1 = new Mail();
+        Mail m2 = new Mail();
+        Contacto c1 = new Contacto("Nombre", "nombre@outlook.com",m1);
+        Contacto c2 = new Contacto("Nombre 2", "nombre2@outlook.com",m2);
+        m1.logIn(c1);
+        m2.logIn(c2);
+
+        m1.crearCorreo("Asunto", "Contenido", c2);
+        
+        assertEquals(1,m1.getBandeja().getBandejaBorradores().size());
+        m1.enviarCorreo(m1.getBandeja().getBandejaBorradores().get(0),c2);
+
+
+        assertEquals(1,m2.getBandeja().getBandejaDeEntrada().size() );
+        assertEquals(1,m1.getBandeja().getBandejaEnviados().size() );
+
+    }
 }
