@@ -89,7 +89,7 @@ public class BandejaTest {
     }
 
     @Test
-    public void testDeFiltroIgnorarCorreos() {
+    public void testDeFiltroIgnorarCorreosDeLaAFIP() {
         Mail m1 = new Mail();
         Mail m2 = new Mail();
         Contacto c1 = new Contacto("AFIP", "nombre@afip.gob.ar",m1);
@@ -102,11 +102,32 @@ public class BandejaTest {
         m1.crearCorreo("Asunto2", "Contenido2", c2);
         m1.enviarCorreo(c2);
 
-        ArrayList<Correo> resultado = m2.getBandeja().filtroCorreoIgnorado();
+        ArrayList<Correo> resultado = m2.getBandeja().filtroIgnorarAAFIP();
 
         assertEquals("Debe devolver dos correos con el remitente 'nombre@afip.gob.ar' y con asunto 'Impuestos'", resultado.size(), 1);
         assertEquals("nombre@afip.gob.ar", resultado.get(0).getRemitente());
         assertEquals("Impuestos adeudados 05/11/2025", resultado.get(0).getAsunto());
+    }
+
+    @Test
+    public void testDeFiltroIgnorarCorreosDeHugo() {
+        Mail m1 = new Mail();
+        Mail m2 = new Mail();
+        Contacto c1 = new Contacto("Hugo Ibáñez", "hugo@hotmail.com",m1);
+        Contacto c2 = new Contacto("Nombre 2", "nombre2@outlook.com",m2);
+        m1.logIn(c1);
+        m2.logIn(c2);
+
+        m1.crearCorreo("Devolveme la plata infelíz", "Dale, devolveme la plata que necesito urgente esos $600.000", c2);
+        m1.enviarCorreo(c2);
+        m1.crearCorreo("Asunto2", "Contenido2", c2);
+        m1.enviarCorreo(c2);
+
+        ArrayList<Correo> resultado = m2.getBandeja().filtroIgnorarAHugo();
+
+        assertEquals("Debe devolver dos correos con el remitente 'nombre@afip.gob.ar' y con asunto 'Impuestos'", resultado.size(), 2);
+        assertEquals("hugo@hotmail.com", resultado.get(0).getRemitente());
+        assertEquals("Devolveme la plata infelíz", resultado.get(0).getAsunto());
     }
 
     @Test
@@ -129,6 +150,31 @@ public class BandejaTest {
         assertEquals("noreply@steampowered.com", resultado.get(0).getRemitente());
         assertEquals("¡Enshrouded, 3 y otros artículos de tu lista de deseados de Steam ahora están en oferta!", resultado.get(0).getAsunto());
     }
+
+    @Test
+    public void testDeFiltroCorreosUCP() {
+        Mail m1 = new Mail();
+        Mail m2 = new Mail();
+        Mail m3 = new Mail();
+        Contacto c1 = new Contacto("UCP Avisos", "nombre@ucp.edu.ar",m1);
+        Contacto c2 = new Contacto("Nombre 2", "nombre2@outlook.com",m2);
+        Contacto c3 = new Contacto("Nombre 3", "nombre3@outlook.com",m3);
+        m1.logIn(c1);
+        m2.logIn(c2);
+        m2.logIn(c3);
+
+        m1.crearCorreo("Avisos eventos 08/11-06/12", "Contenido", c3);
+        m1.enviarCorreo(c3);
+        m2.crearCorreo("Asunto2", "Contenido2", c3);
+        m2.enviarCorreo(c3);
+
+        ArrayList<Correo> resultado = m3.getBandeja().filtroCorreoUCP();
+
+        assertEquals("Debe devolver un correo con el remitente 'nombre@ucp.edu.ar'", resultado.size(), 1);
+        assertEquals("nombre@ucp.edu.ar", resultado.get(0).getRemitente());
+        assertEquals("Avisos eventos 08/11-06/12", resultado.get(0).getAsunto());
+    }
+
     @Test
     public void testMarcarFavorito(){
         Mail m1 = new Mail();

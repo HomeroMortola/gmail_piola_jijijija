@@ -102,11 +102,20 @@ public class Bandeja {
         return correo;
     }
 
-    //Filtro ignorar
-    public ArrayList<Correo> filtroCorreoIgnorado() {
+    //Filtro ignorar a la AFIP
+    public ArrayList<Correo> filtroIgnorarAAFIP() {
         ArrayList<Correo> correo = new ArrayList<>(this.bandejaDeEntrada.stream()
                                                                         .filter(considerarRemitenteDelCorreo("@afip.gob.ar"))
                                                                         .filter(considerarAsuntoDelCorreo("impuestos"))
+                                                                        .collect(Collectors.toList()));
+        return correo;
+    }
+    
+    //Filtro ignorar a Hugo
+    public ArrayList<Correo> filtroIgnorarAHugo() {
+        ArrayList<Correo> correo = new ArrayList<>(this.bandejaDeEntrada.stream()
+                                                                        .filter(considerarRemitenteDelCorreo("hugo@hotmail.com")
+                                                                            .or(considerarContenidoDelCorreo("devolveme la plata")))
                                                                         .collect(Collectors.toList()));
         return correo;
     }
@@ -116,6 +125,14 @@ public class Bandeja {
         ArrayList<Correo> correo = new ArrayList<>(this.bandejaDeEntrada.stream()
                                                                         .filter(considerarRemitenteDelCorreo("noreply@steampowered.com"))
                                                                         .filter(considerarAsuntoDelCorreo("oferta"))
+                                                                        .collect(Collectors.toList()));
+        return correo;
+    }
+
+    //Filtro correos UCP
+    public ArrayList<Correo> filtroCorreoUCP() {
+        ArrayList<Correo> correo = new ArrayList<>(this.bandejaDeEntrada.stream()
+                                                                        .filter(considerarRemitenteDelCorreo("@ucp.edu.ar"))
                                                                         .collect(Collectors.toList()));
         return correo;
     }
