@@ -145,7 +145,7 @@ public class Bandeja {
         return correo;
     }
 
-    public void mober(Correo correo, ArrayList<Correo> destino){
+    public void mover(Correo correo, ArrayList<Correo> destino){
         switch (correo.getUbicacion()) {
             case 1:
                 getBandejaDeEntrada().remove(correo);

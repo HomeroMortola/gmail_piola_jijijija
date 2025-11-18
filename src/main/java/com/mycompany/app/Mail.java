@@ -75,7 +75,7 @@ public class Mail {
                                       n.getCorreo());
             n.getMail().recibirCorreo(copia);
         }
-        getBandeja().mober(getCorreoActual(),getBandeja().getBandejaEnviados());
+        getBandeja().mover(getCorreoActual(),getBandeja().getBandejaEnviados());
         getCorreoActual().setUbicacion(2);
         setCorreoActual(null);
         
@@ -111,7 +111,7 @@ public class Mail {
 
     public void eliminarCorreos(Correo correo){ 
         correo.setUbicacionPrevia(correo.getUbicacion());
-        getBandeja().mober(correo, getBandeja().getBandejaEliminados());
+        getBandeja().mover(correo, getBandeja().getBandejaEliminados());
         correo.setUbicacion(4);
     }
 
@@ -119,13 +119,13 @@ public class Mail {
         
         switch (correo.getUbicacionPrevia()) {
             case 1:
-                getBandeja().mober(correo, getBandeja().getBandejaDeEntrada());
+                getBandeja().mover(correo, getBandeja().getBandejaDeEntrada());
                 break;
             case 2:
-                getBandeja().mober(correo, getBandeja().getBandejaEnviados());
+                getBandeja().mover(correo, getBandeja().getBandejaEnviados());
                 break;
             case 3:
-                getBandeja().mober(correo, getBandeja().getBandejaBorradores());
+                getBandeja().mover(correo, getBandeja().getBandejaBorradores());
                 break;
             default:
                 break;
@@ -138,15 +138,4 @@ public class Mail {
     public void leerCorreo(Correo correo){
         correo.setLeido(true);
     }
-
-    public boolean  getLeido(Correo correo){
-        return correo.getLeido();
-    }
-
-
-
-
-
-   
-
 }
